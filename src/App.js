@@ -57,6 +57,7 @@ class ButtonPractice extends React.Component {
     this.setState({dishonored: true});
   }
   render () {
+    // eslint-disable-next-line
     let dishonored = !this.state.dishonored ? <Seppukuer onClick={this.seppuku}/> : <div/>;
     return (
       <div>
@@ -68,7 +69,7 @@ class ButtonPractice extends React.Component {
         {this.state.A ? this.state.linkMessageA : this.state.linkMessageB}
        </a>
        <div>      
-         {dishonored}
+         {/* {dishonored} */}
       </div>
       </div>
       
@@ -80,6 +81,31 @@ function Seppukuer(props) {
     <button onClick={props.onClick}>Dishonor demands this.</button>
   )
 }
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+  }
+  handleChange = (event) => {
+    this.setState({value: event.target.value});
+  }
+  handleSubmit = (event) => {
+    alert(`Name submitted: ${this.state.value}`);
+    event.preventDefault();
+  }
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.vlue} onChange={this.handleChange} />
+        </label>
+        <input type="button" onClick={this.handleSubmit} value="Scuffed_Submit"></input>
+        <input type="submit" value="Submit here"></input>
+      </form>
+    );
+  }
+}
 function App() {
   
   return (
@@ -88,6 +114,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <Clock msg=" " time="10000"/>
         <ButtonPractice />
+        <NameForm />
       </header>
     </div>
   );
